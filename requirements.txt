@@ -1,0 +1,8 @@
+dbt
+google-cloud-bigquery
+google-cloud-bigquery-logging
+google-cloud-bigquery-connection
+google-cloud-bigquery-datatransfer
+google-cloud-bigquery-migration
+google-cloud-bigquery-reservation
+google-cloud-bigquery-storage

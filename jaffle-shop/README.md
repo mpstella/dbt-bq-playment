@@ -1,0 +1,1 @@
+https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language#external_table_option_list
