@@ -7,14 +7,15 @@ sources:
     tables:
     
       - name: customer
-        tags:
-          - "raw.jaffle_shop.customer"
+        tags: 
+        - 'raw.jaffle_shop.customer'
         description: "Customer data from jaffle_shop"
         external:
           location: 'gs://mtdg-dev-raw/landing/customer/*'
           options:
             format: csv
             skip_leading_rows: 1
+            hive_partition_uri_prefix: 'gs://mtdg-dev-raw/landing/customer/'
         columns:
           - name: id
             data_type: integer
@@ -27,14 +28,15 @@ sources:
             description: "Surname"
 
       - name: orders
-        tags:
-          - "raw.jaffle_shop.orders"
+        tags: 
+        - 'raw.jaffle_shop.orders'
         description: "Customer orders data from jaffle_shop"
         external:
           location: 'gs://mtdg-dev-raw/landing/orders/*'
           options:
             format: csv
             skip_leading_rows: 1
+            hive_partition_uri_prefix: 'gs://mtdg-dev-raw/landing/orders/'
         columns:
           - name: id
             data_type: integer

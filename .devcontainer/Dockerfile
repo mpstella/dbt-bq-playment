@@ -22,6 +22,7 @@ RUN echo "if [ -f '/workspaces/google-cloud-sdk/completion.bash.inc' ]; then . '
 
 ENV PATH $PATH:/workspaces/google-cloud-sdk/bin
 ENV GOOGLE_APPLICATION_CREDENTIALS /workspaces/bq-testing/credentials.json 
+ENV DBT_PROFILES_DIR /workspaces/bq-testing/
 
 COPY requirements.txt /tmp/pip-tmp/
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \
