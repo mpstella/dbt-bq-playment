@@ -53,7 +53,6 @@ models:
 
 snapshots:
   jaffle_shop:
-    +materialized: table
     src:    
       jaffle_shop:
         tags:
