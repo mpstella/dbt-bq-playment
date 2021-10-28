@@ -21,8 +21,8 @@ RUN echo "# The next line enables shell command completion for gcloud." >> /home
 RUN echo "if [ -f '/workspaces/google-cloud-sdk/completion.bash.inc' ]; then . '/workspaces/google-cloud-sdk/completion.bash.inc'; fi" >> /home/vscode/.bashrc
 
 ENV PATH $PATH:/workspaces/google-cloud-sdk/bin
-ENV GOOGLE_APPLICATION_CREDENTIALS /workspaces/bq-testing/credentials.json 
-ENV DBT_PROFILES_DIR /workspaces/bq-testing/
+ENV GOOGLE_APPLICATION_CREDENTIALS /workspaces/dbt-bq-playment/credentials.json 
+ENV DBT_PROFILES_DIR /workspaces/dbt-bq-playment/
 
 COPY requirements.txt /tmp/pip-tmp/
 RUN pip3 --disable-pip-version-check --no-cache-dir install -r /tmp/pip-tmp/requirements.txt \

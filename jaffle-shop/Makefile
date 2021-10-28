@@ -3,9 +3,6 @@
 load-external:
 	dbt run-operation stage_external_sources
 
-run-13:
-	dbt --warn-error --strict run --vars '{"P_YEAR": "2020", "P_MONTH": "02", "P_DAY": "13"}'
-
 run:
 	dbt --warn-error --strict run
 
@@ -22,5 +19,5 @@ docs:
 	dbt docs generate
 	dbt docs serve
 
-e2e: load-external run-13 snapshot
+e2e: load-external run snapshot
 	echo "all"

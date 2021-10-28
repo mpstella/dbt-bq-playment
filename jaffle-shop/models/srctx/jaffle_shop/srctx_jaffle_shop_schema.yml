@@ -1,9 +1,60 @@
 version: 2
 
+sources:
+  - name: srctx_jaffle_shop
+    schema: "{{env_var('BQ_SCHEMA_PREFIX')}}_raw_jaffle_shop"
+    loader: gcloud storage
+    tags:
+      - "srctx.jaffle_shop"
+    tables:
+    
+      - name: customer
+        tags: 
+        - "srctx.jaffle_shop.customer"
+        description: "Customer data from jaffle_shop"
+        external:
+          location: "{{env_var('GCS_BUCKET_PATH')}}/jaffle_shop/customers/*"
+          options:
+            format: csv
+            skip_leading_rows: 1
+            hive_partition_uri_prefix: "{{env_var('GCS_BUCKET_PATH')}}/jaffle_shop/customers/"
+        columns:
+          - name: id
+            data_type: integer
+            description: "ID"
+          - name: first_name
+            data_type: string
+            description: "First Name"
+          - name: last_name
+            data_type: string
+            description: "Surname"
+
+      - name: orders
+        tags: 
+        - 'srctx.jaffle_shop.orders'
+        description: "Customer orders data from jaffle_shop"
+        external:
+          location: "{{env_var('GCS_BUCKET_PATH')}}/jaffle_shop/orders/*"
+          options:
+            format: csv
+            skip_leading_rows: 1
+            hive_partition_uri_prefix: "{{env_var('GCS_BUCKET_PATH')}}/jaffle_shop/orders/"
+        columns:
+          - name: id
+            data_type: integer
+            description: "Id"
+          - name: user_id
+            data_type: integer
+            description: "User Id"
+          - name: order_date
+            data_type: string
+            description: "Order Date"
+          - name: status
+            data_type: string
+            description: "Order Status"      
+
 models:
   - name: customers_vw
-    tags: 'src_tx.jaffle_shop.customers_vw'
-    description: One record per customer
     columns:
       - name: customer_id
         description: Primary key
@@ -14,8 +65,6 @@ models:
         description: NULL when a customer has not yet placed an order.
 
   - name: orders_vw
-    tags: 'src_tx.jaffle_shop.orders_vw'  
-    description: This model cleans up order data
     columns:
       - name: order_id
         description: Primary key

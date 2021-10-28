@@ -24,16 +24,22 @@ clean-targets:         # directories to be removed by `dbt clean`
   - "target"
   - "dbt_modules"
 
+vars:
+    'dbt_date:time_zone': 'AUS Eastern Standard Time' # MS format
+    default_low_date: '1900-01-01'
+    default_low_dttm: '1900-01-01 00:00:00'
+    default_high_date: '9999-12-31'
+    default_high_dttm: '9999-12-31 23:59:59'
+    # adding in below to ease testing
+    P_YEAR: 2021
+    P_MONTH: 10
+    P_DAY: 28
 
 # Configuring models
 # Full documentation: https://docs.getdbt.com/docs/configuring-models
 
-# In this example config, we tell dbt to build all models in the example/ directory
-# as tables. These settings can be overridden in the individual model files
-# using the `{{ config(...) }}` macro.
 models:
   jaffle_shop:
-    +materialized: table
     srctx:
       jaffle_shop:
         schema: srctx_jaffle_shop
@@ -43,11 +49,12 @@ models:
       jaffle_shop:
         schema: src_jaffle_shop
         tags:
-          - src.jaffle_shop
+          - "src.jaffle_shop"
 
 snapshots:
   jaffle_shop:
-    src:
+    +materialized: table
+    src:    
       jaffle_shop:
         tags:
           - "src.jaffle_shop.snapshots"

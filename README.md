@@ -1,33 +1,26 @@
 # dbt-bq-playment
 DBT + Bigquery
 
+### Setup
+
 ```text
-cat ~/.dbt/profiles.yml 
-jaffle_shop:
-  outputs:
+$> dbt deps
 
-    dev:
-      type: bigquery
-      method: service-account
-      project: mtdg-espv2-playpen
-      keyfile: /workspaces/bq-testing/credentials.json 
-      dataset: dbt_mps
-      threads: 1
-      timeout_seconds: 300
-      location: australia-southeast1
-      priority: interactive
-      retries: 1
+$> source .env
 
-    prod:
-      type: bigquery
-      method: service-account
-      project: [GCP project id]
-      dataset: [the name of your dbt dataset]
-      threads: [1 or more]
-      keyfile: [/path/to/bigquery/keyfile.json]
-      timeout_seconds: 300
-      priority: interactive
-      retries: 1
+$> # create the external source tables
 
-  target: dev
+$> make load-external
+
+$> make run
+
+$> make snapshot
 ```
+
+
+### Notes
+
+* Datasets cannot have underscores, we need to use dashes!
+* Required SA permissions
+    * BigQuery Data Editor
+    * BigQuery User
